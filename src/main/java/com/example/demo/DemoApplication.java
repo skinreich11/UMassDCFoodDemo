@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import org.apache.tomcat.util.json.JSONParser;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,17 +34,18 @@ public class DemoApplication {
 		if (responseCode == HttpURLConnection.HTTP_OK) { // success
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					con.getInputStream()));
-			String inputLine;
-			StringBuffer response = new StringBuffer();
-
-			while ((inputLine = in.readLine()) != null) {
-				response.append(inputLine);
+			JSONObject jsonObject = new JSONObject();
+			JSONArray jsonArray = new JSONArray();
+			String result = "";
+			String output = null;
+			while ((result = in.readLine()) != null) {
+				output = result.replace("[", "").replace("]", "");
+				jsonObject = new JSONObject(output);
+				jsonArray = new JSONArray(output);
 			}
-			in.close();
-
-			// print result
-			return new JSONObject(response.toString());
-		} else {
+			return jsonObject;
+		}
+		else {
 			return new JSONObject();
 		}
 	}
@@ -57,7 +59,7 @@ public class DemoApplication {
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					con.getInputStream()));
 		}
-		return new JSONObject(con.getInputStream());
+		return new JSONObject();
 	}
 }
 
