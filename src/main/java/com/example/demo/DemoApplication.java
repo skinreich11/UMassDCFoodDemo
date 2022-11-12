@@ -25,7 +25,7 @@ public class DemoApplication {
 	}
 
 	@GetMapping
-	public String printlocations() throws IOException {
+	public JSONObject printlocations() throws IOException {
 		URL obj = new URL("https://umassdining.com/uapp/get_infov2");
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("GET");
@@ -42,9 +42,9 @@ public class DemoApplication {
 			in.close();
 
 			// print result
-			return response.toString();
+			return new JSONObject(response.toString());
 		} else {
-			return "GET did not work";
+			return new JSONObject();
 		}
 	}
 	@GetMapping("/input")
