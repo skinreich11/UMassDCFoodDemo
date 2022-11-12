@@ -47,8 +47,8 @@ public class DemoApplication {
 		}
 	}
 	@GetMapping
-	public Object getmenu() throws IOException {
-		URL obj = new URL("https://umassdining.com/foodpro-menu-ajax?tid=3&date=11%2F12%2F2022");
+	public String getmenu(@RequestParam String food) throws IOException {
+		URL obj = new URL("https://umassdining.com/foodpro-menu-ajax?tid=0&date=11%2F12%2F2022");
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("GET");
 		int responseCode = con.getResponseCode();
@@ -56,10 +56,17 @@ public class DemoApplication {
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					con.getInputStream()));
 			JSONTokener tokener = new JSONTokener(in);
-			JSONObject json = new JSONObject(tokener);
-			return json.toMap().get("lunch");
+			Map<String, Object> json = new JSONObject(tokener).toMap();
+			StringBuilder keys = new StringBuilder();
+			for(String meal : json.keySet()) {
+				keys.append(json.get(meal).toString());
+			}
+			return keys.toString();
 		}
-		return new Object();
+		return "Your amazing bot is sorry to report that " + food + "is not offered in any of the 4 main dining commons " +
+				"on campus :((((. However, in my greatness I have found an abundance of delicious food across the main " +
+				"dining commons. I implore you to search for more of your favorite foods, I am certain they are offered " +
+				"somewhere today!";
 	}
 }
 
