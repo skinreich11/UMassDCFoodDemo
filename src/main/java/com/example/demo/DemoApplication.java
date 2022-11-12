@@ -11,9 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +31,7 @@ public class DemoApplication {
 	}
 
 	@GetMapping
-	public JSONArray printlocations() throws IOException {
+	public List<Object> printlocations() throws IOException {
 		URL obj = new URL("https://umassdining.com/uapp/get_infov2");
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("GET");
@@ -37,10 +41,10 @@ public class DemoApplication {
 					con.getInputStream()));
 			JSONTokener tokener = new JSONTokener(in);
 			JSONArray json = new JSONArray(tokener);
-			return json;
+			return json.toList();
 		}
 		else {
-			return new JSONArray();
+			return Collections.emptyList();
 		}
 	}
 	@GetMapping("/input")
