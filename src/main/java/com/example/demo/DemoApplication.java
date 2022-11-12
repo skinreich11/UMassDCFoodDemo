@@ -21,7 +21,7 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@GetMapping("/api")
+	@GetMapping
 	public String printlocation() throws IOException {
 		URL obj = new URL("https://umassdining.com/uapp/get_infov2");
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
