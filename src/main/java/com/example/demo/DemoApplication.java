@@ -57,7 +57,7 @@ public class DemoApplication {
 					con.getInputStream()));
 			JSONTokener tokener = new JSONTokener(in);
 			JSONObject json = new JSONObject(tokener);
-			return json.get("Grill Station");
+			return json.toMap();
 		}
 		return new Object();
 	}
