@@ -2,7 +2,6 @@ server:
   error:
     include-message: always
     include-binding-errors: always
-
 cloud:
   aws:
     credentials:
