@@ -27,7 +27,7 @@ public class DemoApplication {
 	}
 
 	@GetMapping
-	public JSONObject printlocations() throws IOException {
+	public JSONArray printlocations() throws IOException {
 		URL obj = new URL("https://umassdining.com/uapp/get_infov2");
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("GET");
@@ -36,11 +36,11 @@ public class DemoApplication {
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					con.getInputStream()));
 			JSONTokener tokener = new JSONTokener(in);
-			JSONObject json = new JSONObject(tokener);
+			JSONArray json = new JSONArray(tokener);
 			return json;
 		}
 		else {
-			return new JSONObject();
+			return new JSONArray();
 		}
 	}
 	@GetMapping("/input")
