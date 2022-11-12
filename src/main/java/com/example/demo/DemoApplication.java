@@ -30,7 +30,6 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@GetMapping
 	public List<Object> printlocations() throws IOException {
 		URL obj = new URL("https://umassdining.com/uapp/get_infov2");
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -47,17 +46,20 @@ public class DemoApplication {
 			return Collections.emptyList();
 		}
 	}
-	@GetMapping("/input")
-	public JSONObject printlocationoninput(@RequestParam String userInput) throws IOException {
-		URL obj = new URL("https://umassdining.com/uapp/get_infov2");
+	@GetMapping
+	public Object getmenu() throws IOException {
+		URL obj = new URL("https://umassdining.com/foodpro-menu-ajax?tid=3&date=11%2F12%2F2022");
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("GET");
 		int responseCode = con.getResponseCode();
 		if (responseCode == HttpURLConnection.HTTP_OK) { // success
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					con.getInputStream()));
+			JSONTokener tokener = new JSONTokener(in);
+			JSONObject json = new JSONObject(tokener);
+			return json.get("Gril Station");
 		}
-		return new JSONObject();
+		return new Object();
 	}
 }
 
