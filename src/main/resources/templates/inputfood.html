@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<body>
+<body text="#61BAED">
 <head>
-  <title>The ultimate UMass DC search</title>
+    <center><title>The ultimate UMass DC search</title></center>
 </head>
-<h2>What food are you craving?</h2>
-<form method = "GET" action = "/needfood">
+<style>body {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/UMass_Amherst_athletics_logo.svg/1200px-UMass_Amherst_athletics_logo.svg.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}</style>
+    <br><br><br><br><br><br><br><br>
+<center><b><h1>The ultimate UMass DC search!</h1></b></center>
+    <center><b><h2>Craving something? search below the name of ur favorite food and find out</h2></b>
+    <h2><b>if its available RIGHT NOW at a DC near you!</h2></b></center>
+        <center><form method = "GET" action = "/needfood">
     enter here:<br> <input type="text" name="name">
     <br>
-  </form>
+  </form></center>
 </body>
 </html>

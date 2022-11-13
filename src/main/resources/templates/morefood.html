@@ -4,14 +4,21 @@
     <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body>
-<p th:text="${name}"></p>
-<p>
+<body text="#61BAED">
+<style>body {
+background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/UMass_Amherst_athletics_logo.svg/1200px-UMass_Amherst_athletics_logo.svg.png");
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-position: center;
+}</style>
+<br><br><br><br>
+<center><font size="+2.5"><b><p th:text="${name}"></p></b></font><br><br>
+<p><b><font size="+2">
     want to find other food that you love in award-winning dining? search below again!<br>
-    </p>
-    <form method = "GET" action = "/needfood">
+</bfont></p></b>
+ <form method = "GET" action = "/needfood">
         enter here:<br> <input type="text" name="name">
         <br>
-    </form>
+    </form></center>
 </body>
 </html>
